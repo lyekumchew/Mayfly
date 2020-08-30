@@ -7,10 +7,10 @@ import (
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/labstack/gommon/log"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 	"html/template"
-	"log"
 	"net/http"
 	"net/url"
 )
@@ -45,7 +45,7 @@ func init() {
 		Secure: true,
 	})
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatal(err)
 	}
 
 	ctx = context.Background()
@@ -79,6 +79,7 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.BodyLimit(*limit))
+	e.Logger.SetLevel(log.INFO)
 
 	e.GET("/", func(c echo.Context) error {
 		return c.HTML(http.StatusOK, index)
