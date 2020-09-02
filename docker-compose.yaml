@@ -2,7 +2,7 @@ version: "3.1"
 
 services:
   mayfly:
-    image: lyekumchew/mayfly
+    image: ghcr.io/lyekumchew/mayfly:latest
     environment:
       - ENDPOINT=
       - ACCESSKEYID=
